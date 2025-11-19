@@ -1,5 +1,7 @@
 package ru.job4j.base
 
+private const val ELEVEN = 11
+
 /* Draw X. size > 0 и нечетное */
 fun draw(size: Int) {
     val start = 0
@@ -16,5 +18,5 @@ fun draw(size: Int) {
 }
 
 fun main() {
-    draw(11)
+    draw(ELEVEN)
 }
