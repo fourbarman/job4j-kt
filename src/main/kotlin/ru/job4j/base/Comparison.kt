@@ -1,13 +1,12 @@
 package ru.job4j.base
 
 private const val THREE = 3
-private const val SIX = 3
-private const val EIGHT = 3
+private const val SIX = 6
+private const val EIGHT = 8
 
 fun max(first: Int, second: Int): Int = if (first > second) first else second
 
-fun max(first: Int, second: Int, third: Int): Int =
-    if (max(first, second) < third) third else max(first, second)
+fun max(first: Int, second: Int, third: Int): Int = max(max(first, second), third)
 
 
 fun main() {
