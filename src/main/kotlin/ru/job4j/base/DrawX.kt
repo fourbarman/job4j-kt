@@ -5,19 +5,19 @@ fun draw(size: Int): List<List<Char>> {
     if ( size < 0 || size % 2 == 0) return emptyList()
 
     val start = 0
-    val xList = ArrayList<List<Char>>()
+    val rows = ArrayList<List<Char>>()
     for (row in start until size) {
-        val xCellList = ArrayList<Char>()
+        val rowCells = ArrayList<Char>()
         for (cell in start until size) {
             if (row == cell || row + cell == size - 1) {
-                xCellList.add('X')
+                rowCells.add('X')
             } else {
-                xCellList.add(' ')
+                rowCells.add(' ')
             }
         }
-        xList.add(xCellList)
+        rows.add(rowCells)
     }
-    return xList
+    return rows
 }
 
 fun main() {
