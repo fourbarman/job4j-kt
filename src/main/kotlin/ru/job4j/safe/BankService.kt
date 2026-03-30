@@ -25,17 +25,13 @@ class BankService {
         srcPassport: String, srcRequisite: String,
         destPassport: String, destRequisite: String,
         amount: Double
-    ) : Boolean {
+    ): Boolean {
 
-        val source = findByRequisite(srcPassport, srcRequisite)
-        val dest = findByRequisite(destPassport, destRequisite)
-        return if (source != null && dest != null) {
-            source.balance -= amount
-            dest.balance += amount
-            true
-        } else {
-            false
-        }
+        val source = findByRequisite(srcPassport, srcRequisite) ?: return false
+        val dest = findByRequisite(destPassport, destRequisite) ?: return false
+        source.balance -= amount
+        dest.balance += amount
+        return true
     }
 }
 
