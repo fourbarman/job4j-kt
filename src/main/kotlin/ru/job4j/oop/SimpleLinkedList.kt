@@ -50,5 +50,40 @@ class SimpleLinkedList<T> : Iterable<T> {
         }
     }
 
+    fun listIterator(): ListIterator<T> = SimpleLinkedListIterator()
+
+    inner class SimpleLinkedListIterator : ListIterator<T> {
+        private var cursor = 0
+
+
+        override fun hasNext(): Boolean {
+            return cursor < size
+        }
+
+        override fun hasPrevious(): Boolean {
+            return cursor > 0
+        }
+
+        override fun next(): T {
+            if (!hasNext()) throw NoSuchElementException()
+            return get(cursor++)
+        }
+
+        override fun nextIndex(): Int {
+            return cursor
+        }
+
+        override fun previous(): T {
+            if (!hasPrevious()) throw NoSuchElementException()
+            cursor--
+            return get(cursor)
+        }
+
+        override fun previousIndex(): Int {
+            return cursor - 1
+        }
+
+    }
+
     class Node<K>(val value: K, var next: Node<K>? = null)
 }

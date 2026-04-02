@@ -163,4 +163,134 @@ class SimpleLinkedListTest {
 
         assertThat(result).containsExactlyInAnyOrder("1", "2", "3")
     }
+
+    @Test
+    fun whenListIteratorOnEmptyListThenHasNextIsFalse() {
+        val list = SimpleLinkedList<String>()
+        val it = list.listIterator()
+        assertThat(it.hasNext()).isFalse()
+    }
+
+    @Test
+    fun whenListIteratorOnEmptyListThenHasPreviousIsFalse() {
+        val list = SimpleLinkedList<String>()
+        val it = list.listIterator()
+        assertThat(it.hasPrevious()).isFalse()
+    }
+
+    @Test
+    fun whenListIteratorNextOnEmptyListThenThrowNoSuchElementException() {
+        val list = SimpleLinkedList<String>()
+        val it = list.listIterator()
+
+        assertThrows(NoSuchElementException::class.java) {
+            it.next()
+        }
+    }
+
+    @Test
+    fun whenListIteratorPreviousOnEmptyListThenThrowNoSuchElementException() {
+        val list = SimpleLinkedList<String>()
+        val it = list.listIterator()
+
+        assertThrows(NoSuchElementException::class.java) {
+            it.previous()
+        }
+    }
+
+    @Test
+    fun whenListIteratorAtStartThenIndexesAreCorrect() {
+        val list = SimpleLinkedList<String>()
+        list.add("1")
+        list.add("2")
+        list.add("3")
+
+        val it = list.listIterator()
+
+        assertThat(it.nextIndex()).isEqualTo(0)
+        assertThat(it.previousIndex()).isEqualTo(-1)
+    }
+
+    @Test
+    fun whenListIteratorNextThenReturnElementsInListOrder() {
+        val list = SimpleLinkedList<String>()
+        list.add("1")
+        list.add("2")
+        list.add("3")
+
+        val it = list.listIterator()
+
+        assertThat(it.next()).isEqualTo("3")
+        assertThat(it.next()).isEqualTo("2")
+        assertThat(it.next()).isEqualTo("1")
+        assertThat(it.hasNext()).isFalse()
+    }
+
+    @Test
+    fun whenListIteratorNextThenIndexesChange() {
+        val list = SimpleLinkedList<String>()
+        list.add("1")
+        list.add("2")
+        list.add("3")
+
+        val it = list.listIterator()
+
+        assertThat(it.nextIndex()).isEqualTo(0)
+        assertThat(it.previousIndex()).isEqualTo(-1)
+
+        it.next()
+        assertThat(it.nextIndex()).isEqualTo(1)
+        assertThat(it.previousIndex()).isEqualTo(0)
+
+        it.next()
+        assertThat(it.nextIndex()).isEqualTo(2)
+        assertThat(it.previousIndex()).isEqualTo(1)
+    }
+
+    @Test
+    fun whenListIteratorPreviousAfterNextThenReturnPreviousElement() {
+        val list = SimpleLinkedList<String>()
+        list.add("1")
+        list.add("2")
+        list.add("3")
+
+        val it = list.listIterator()
+
+        assertThat(it.next()).isEqualTo("3")
+        assertThat(it.next()).isEqualTo("2")
+        assertThat(it.previous()).isEqualTo("2")
+        assertThat(it.previous()).isEqualTo("3")
+        assertThat(it.hasPrevious()).isFalse()
+    }
+
+    @Test
+    fun whenListIteratorNextAfterEndThenThrowNoSuchElementException() {
+        val list = SimpleLinkedList<String>()
+        list.add("1")
+        list.add("2")
+        list.add("3")
+
+        val it = list.listIterator()
+        it.next()
+        it.next()
+        it.next()
+
+        assertThrows(NoSuchElementException::class.java) {
+            it.next()
+        }
+    }
+
+    @Test
+    fun whenListIteratorPreviousAtStartThenThrowNoSuchElementException() {
+        val list = SimpleLinkedList<String>()
+        list.add("1")
+        list.add("2")
+        list.add("3")
+
+        val it = list.listIterator()
+
+        assertThrows(NoSuchElementException::class.java) {
+            it.previous()
+        }
+    }
 }
