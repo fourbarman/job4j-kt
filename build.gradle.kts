@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version "2.0.20"
-    id("io.gitlab.arturbosch.detekt") version "1.23.8" // Замените на актуальную версию Detekt
+    id("io.gitlab.arturbosch.detekt") version "1.23.8"
 }
 
 group = "ru.job4j"
@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    //testImplementation(kotlin("test"))
+    implementation("com.h2database:h2:2.2.224")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.1")
     testImplementation("org.assertj:assertj-core:3.24.2")
 }
